@@ -4,7 +4,7 @@ interface DNA {
 }
 
 // the population of our generation (the higher the population, the higher the variance)
-const POPULATION = 1000
+const POPULATION = 100
 
 // the character set of which we are using (note: I am not using integer values)
 const charset = "abcdefghijklmnopqrstuvwxyz";
@@ -16,13 +16,15 @@ const array = [] as DNA[];
 function init() {
 
     let stringLength = 5;
-    for (let i = 0; i < this.POPULATION; i++)
+    for (let i = 0; i < POPULATION; i++)
     {
         let obj = {word: randomString(stringLength)} as DNA
-        this.array.push(obj)
-        console.log(array)
+        array.push(obj)
     }
 
+    array.forEach((DNA) => {
+        console.log(DNA.word)
+    });
 }
 
 // pure function
@@ -35,7 +37,7 @@ function randomString(stringLength : number) : string {
     let result = '';
     for (let i = 0; i < stringLength; i++)
     {
-        result += this.charset[Math.floor(Math.random() * this.charset.length)];
+        result += charset[Math.floor(Math.random() * charset.length)];
     }
     return result;
 }
