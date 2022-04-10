@@ -52,7 +52,6 @@ Parent 2: coolbucks (00001111)
 
 CROSSOVER using Binary:
 
-
 MUTATION on New Element: 1% to 10% chance that the binary number will mutate to a different letter
 
 
