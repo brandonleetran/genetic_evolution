@@ -1,6 +1,8 @@
 "use strict";
+// the target value
+const target = "";
 // the population of our generation (the higher the population, the higher the variance)
-const POPULATION = 1000;
+const POPULATION = 100;
 // the character set of which we are using (note: I am not using integer values)
 const charset = "abcdefghijklmnopqrstuvwxyz";
 // the list of DNAs that will be generated using natural selection
@@ -11,8 +13,10 @@ function init() {
     for (let i = 0; i < POPULATION; i++) {
         let obj = { word: randomString(stringLength) };
         array.push(obj);
-        console.log(array);
     }
+    array.forEach((DNA) => {
+        console.log(DNA.word);
+    });
 }
 // pure function
 function stringLength(obj) {
