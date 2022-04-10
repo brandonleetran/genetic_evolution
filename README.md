@@ -26,12 +26,13 @@ The higher the fitness rate, the more likelihood genetic information will be pas
 
 Algorithm:
 1. Create a population with random N elements (VARIATION)
-2a. Calculate the fitness for N elements (SELECTION)
-2b. Reproduction/Selection
-2b a. Pick "two" parents (two is arbitrary) (SELECTION)
-2b b. Make a new element 
-2b b. a. Crossover
-2b b. b. Mutation
+2. Calculate the fitness for N elements (SELECTION)
+    I. Reproduction/Selection
+    II.
+        i. Pick "two" parents (two is arbitrary) (SELECTION)
+        ii. Make a new element 
+            a. Crossover
+            b. Mutation
 
 ---------------------------------------------------------------------------------------------
 
