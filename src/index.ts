@@ -2,6 +2,7 @@
 interface DNA {
     word : string,
     fitness?: number // this is optional for the initial population
+    // the fitness score is used as the probability of getting picked by the next generation
 }
 
 // the target value
@@ -38,12 +39,14 @@ function init() {
 
         obj.word = word
 
+        obj.fitness = calcFitness(word)
+
         array.push(obj)
-        array = calcFitness(array)
     }
 
-    // print
     console.log(array)
+
+    // reproduction/selection
 }
 
 // pure function that returns a random integer between min (inclusive) and max (inclusive).
@@ -67,15 +70,8 @@ function randomString(stringLength : number) : string {
     return result
 }
 
-// function that calculates the fitness score of each DNA object
-function calcFitness(obj : DNA[]) : DNA[] {
-
-    const array: DNA[] = []
-
-    // calculate fitness score here
-    obj.forEach((DNA => {
-        let word = DNA.word
-
+// function that calculates the fitness score of each DNA word
+function calcFitness(word : string) : number {
         // we know all strings populated will have the same length as 
         // the target
         let score = 0
@@ -86,15 +82,7 @@ function calcFitness(obj : DNA[]) : DNA[] {
                 score += 1
             }
         }
-
-        // add fitnesss score to array
-        array.push({
-            word: word,
-            fitness: score
-        })
-    }))
-
-    return array
+        return score
 }
 
 // start
