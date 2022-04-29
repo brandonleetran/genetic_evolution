@@ -1,7 +1,7 @@
 // the interface for our DNA objects
 interface DNA {
     word : string,
-    fitness?: number // this is optional for the initial population
+    fitness: number,
     // the fitness score is used as the probability of getting picked by the next generation
 }
 
@@ -9,7 +9,7 @@ interface DNA {
 const target = "brandon tran" 
 
 // the max population
-const MAX_POPULATION = 10
+const MAX_POPULATION = 10000
 
 // the minimum population
 const MIN_POPULATION = 1
@@ -31,22 +31,43 @@ function init() {
     // populating the initial generation
     for (let i = 0; i < POPULATION; i++)
     {
-        // create a DNA object
-        let obj = {} as DNA
-
         // create a random word based on string length
         let word = randomString(stringLength)
 
-        obj.word = word
-
-        obj.fitness = calcFitness(word)
+        let obj = { word: word, fitness: calcFitness(word) } as DNA
 
         array.push(obj)
     }
 
+    // end of initialization
+    
     console.log(array)
 
     // reproduction/selection
+    // create an array of two objs, these objs will be the parents of the next generation
+    const parents: DNA[] = []
+
+    // get first parent
+    // YES! it is possible to have duplicate parents (this is an arbritrary decision)
+    let count = 0;
+    while (count != 2) {
+        array.every((DNA => {
+            let value = pickParents(DNA.fitness)
+            if (!value) {
+                return true
+            }
+            else {
+                parents.push(DNA)
+                count++
+                return false
+            }
+        }))
+    }
+
+    console.log(parents)
+    
+
+
 }
 
 // pure function that returns a random integer between min (inclusive) and max (inclusive).
@@ -57,6 +78,11 @@ function randomNumber(max : number, min : number ) : number {
 // pure function that returns the length of a DNA string
 function stringLength(obj : DNA) : number {
     return obj.word.length
+}
+
+// pure function that returns true or false based on probability
+function pickParents(fitness : number) : boolean {
+    return Math.random() < fitness  * .100 // ie: Math.random() < .10 means 10% chance it will return true
 }
 
 // function that generates a random string based on string length
