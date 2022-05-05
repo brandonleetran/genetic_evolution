@@ -45,29 +45,21 @@ function init() {
 
     // reproduction/selection
     // create an array of two objs, these objs will be the parents of the next generation
-    const parents: DNA[] = []
-
-    // get first parent
+    const matingPool: DNA[] = []
+ 
+    // get parents
     // YES! it is possible to have duplicate parents (this is an arbritrary decision)
-    let count = 0;
-    while (count != 2) {
-        array.every((DNA => {
-            let value = pickParents(DNA.fitness)
-            if (!value) {
-                return true
-            }
-            else {
-                parents.push(DNA)
-                count++
-                return false
-            }
-        }))
-    }
+    // using a while loop because for-loops may not populate parent array 100%
+    array.forEach((DNA => {
+        for (let i = 0; i < DNA.fitness; i++) {
+            matingPool.push(DNA)
+        }
+    }))
 
-    console.log(parents)
-    
+    // crossover child
+    //const offSpring = crossOver(parents[0].word, parents[1].word)
 
-
+    console.log(matingPool)
 }
 
 // pure function that returns a random integer between min (inclusive) and max (inclusive).
@@ -82,7 +74,19 @@ function stringLength(obj : DNA) : number {
 
 // pure function that returns true or false based on probability
 function pickParents(fitness : number) : boolean {
-    return Math.random() < fitness  * .100 // ie: Math.random() < .10 means 10% chance it will return true
+    return Math.random() < fitness  * .01 // ie: Math.random() < .10 means 10% chance it will return true
+    // assuming that fitness scores is from 0 to 100 inclusively
+}
+
+// parents crossover to create a new offspring
+function crossOver(chromosome_1 : string, chromosome_2 : string) : string {
+    let offspring = ""
+
+    for (let i = 0; i < target.length / 2; i++) {
+
+    }
+
+    return offspring
 }
 
 // function that generates a random string based on string length
